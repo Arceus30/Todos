@@ -5,6 +5,7 @@ const App = () => {
     const [count, setCount] = useState(0);
     const handleClick = async () => {
         try {
+            console.log(import.meta.env.VITE_URL + import.meta.env.VITE_COUNT);
             const resp = await axios.get(
                 import.meta.env.VITE_URL + import.meta.env.VITE_COUNT
             );
