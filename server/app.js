@@ -40,7 +40,7 @@ app.use(
 const secret = process.env.SECRET;
 
 const store = MongoStore.create({
-    mongoUrl: dbUrl,
+    mongoUrl: process.env.DB_URL,
     touchAfter: 24 * 60 * 60,
     crypto: {
         secret,
