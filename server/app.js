@@ -9,13 +9,16 @@ const mongoSanitize = require("express-mongo-sanitize");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const ExpressError = require("./utils/ExpressError.js");
-// const MongoStore = require("connect-mongo");
 
-const dbUrl = process.env.DB_URL;
-console.log(dbUrl);
+console.log(process.env.DB_URL);
+console.log(process.env.BASE_URL_1);
+console.log(process.env.PORT);
+console.log(process.env.SECRET);
+console.log(process.env.UNIQUE_URL);
+console.log(process.env.REGISTER);
 
 mongoose
-    .connect(dbUrl)
+    .connect(process.env.DB_URL)
     .then(() => {
         console.log(`Server-Database Connection Successful`);
     })
@@ -41,14 +44,6 @@ app.use(
 );
 
 const secret = process.env.SECRET;
-
-// const store = MongoStore.create({
-//     mongoUrl: dbUrl,
-//     touchAfter: 24 * 60 * 60,
-//     crypto: {
-//         secret,
-//     },
-// });
 
 const sessionConfig = {
     name: "session",
