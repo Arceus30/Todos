@@ -11,8 +11,11 @@ const LocalStrategy = require("passport-local");
 const ExpressError = require("./utils/ExpressError.js");
 const MongoStore = require("connect-mongo");
 
+const dbUrl = process.env.DB_URL;
+console.log(dbUrl);
+
 mongoose
-    .connect(process.env.DB_URL)
+    .connect(dbUrl)
     .then(() => {
         console.log(`Server-Database Connection Successful`);
     })
@@ -40,7 +43,7 @@ app.use(
 const secret = process.env.SECRET;
 
 const store = MongoStore.create({
-    mongoUrl: process.env.DB_URL,
+    mongoUrl: dbUrl,
     touchAfter: 24 * 60 * 60,
     crypto: {
         secret,
