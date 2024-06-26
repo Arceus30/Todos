@@ -7,7 +7,36 @@ const routes = createBrowserRouter([
         path: "/",
         element: <App />,
         errorElement: <Error />,
-        children: [{}],
+        children: [
+            // {
+            //     path: "",
+            //     element: <Home />,
+            // },
+            // {
+            //     path: import.meta.env.VITE_ABOUT,
+            //     element: <About />,
+            // },
+            // {
+            //     path: import.meta.env.VITE_SIGNUP,
+            //     element: <SignUp />,
+            // },
+            // {
+            //     path: import.meta.env.VITE_SIGNIN,
+            //     element: <SignIn />,
+            // },
+            // {
+            //     path: import.meta.env.VITE_ABOUT,
+            //     element: <About />,
+            // },
+            // {
+            //     path: import.meta.env.VITE_ABOUT,
+            //     element: <About />,
+            // },
+            // {
+            //     path: import.meta.env.VITE_ABOUT,
+            //     element: <About />,
+            // },
+        ],
     },
 ]);
 

@@ -5,7 +5,7 @@ import Footer from "./components/Footer/Footer.jsx";
 
 const App = () => {
     return (
-        <div>
+        <div className="h-100 d-flex flex-column">
             <Navbar />
             <Outlet />
             <Footer />
