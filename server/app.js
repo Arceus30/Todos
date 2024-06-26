@@ -8,7 +8,6 @@ const corsConfig = {
 };
 
 app.use(cors(corsConfig));
-app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
