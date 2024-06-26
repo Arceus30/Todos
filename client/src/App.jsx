@@ -9,6 +9,7 @@ const App = () => {
                 import.meta.env.VITE_ENV === "production"
                     ? import.meta.env.VITE_PROD_COUNT
                     : import.meta.env.VITE_DEV_COUNT;
+            console.log(COUNT_API);
             const resp = await axios.get(COUNT_API);
             setCount(resp.data.count);
         } catch (e) {
