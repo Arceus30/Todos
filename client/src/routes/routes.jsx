@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Error from "../Error/Error";
 import Home from "../components/Home/Home";
+import SignUp from "../components/SignUp/SignUp";
 
 const routes = createBrowserRouter([
     {
@@ -17,10 +18,10 @@ const routes = createBrowserRouter([
             //     path: import.meta.env.VITE_ABOUT,
             //     element: <About />,
             // },
-            // {
-            //     path: import.meta.env.VITE_SIGNUP,
-            //     element: <SignUp />,
-            // },
+            {
+                path: import.meta.env.VITE_SIGNUP,
+                element: <SignUp />,
+            },
             // {
             //     path: import.meta.env.VITE_SIGNIN,
             //     element: <SignIn />,

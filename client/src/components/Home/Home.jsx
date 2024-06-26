@@ -15,11 +15,11 @@ const Home = () => {
     return (
         <div className="d-flex my-auto justify-content-center align-items-center mb-3">
             <div className="w-75 d-flex justify-content-center align-items-center flex-column mx-0">
-                <h1 className="text-center">
+                <h1 className="text-center customHead">
                     Organize your <br />
                     work and life, finally.
                 </h1>
-                <p className="text-center my-2">
+                <p className="text-center my-2 customText">
                     Become focused, organized, and calm with <br />
                     todo app. The World's #1 task manager app.
                 </p>
