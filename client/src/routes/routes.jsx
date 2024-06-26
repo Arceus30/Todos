@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Error from "../Error/Error";
+import Home from "../components/Home/Home";
 
 const routes = createBrowserRouter([
     {
@@ -8,10 +9,10 @@ const routes = createBrowserRouter([
         element: <App />,
         errorElement: <Error />,
         children: [
-            // {
-            //     path: "",
-            //     element: <Home />,
-            // },
+            {
+                path: "",
+                element: <Home />,
+            },
             // {
             //     path: import.meta.env.VITE_ABOUT,
             //     element: <About />,
