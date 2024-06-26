@@ -9,6 +9,8 @@ const mongoSanitize = require("express-mongo-sanitize");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const ExpressError = require("./utils/ExpressError.js");
+const MongoStore = require("connect-mongo");
+
 mongoose
     .connect(process.env.DB_URL)
     .then(() => {
@@ -37,7 +39,16 @@ app.use(
 
 const secret = process.env.SECRET;
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret,
+    },
+});
+
 const sessionConfig = {
+    store,
     name: "session",
     secret,
     resave: false,
