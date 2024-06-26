@@ -1,4 +1,4 @@
-require("dotenv").config();
+if (process.env.NODE_ENV !== "production") require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -9,13 +9,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const ExpressError = require("./utils/ExpressError.js");
-
-console.log(process.env.DB_URL);
-console.log(process.env.BASE_URL_1);
-console.log(process.env.PORT);
-console.log(process.env.SECRET);
-console.log(process.env.UNIQUE_URL);
-console.log(process.env.REGISTER);
+const MongoStore = require("connect-mongo");
 
 mongoose
     .connect(process.env.DB_URL)
@@ -45,7 +39,16 @@ app.use(
 
 const secret = process.env.SECRET;
 
+const store = MongoStore.create({
+    mongoUrl: process.env.DB_URL,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret,
+    },
+});
+
 const sessionConfig = {
+    store,
     name: "session",
     secret,
     resave: false,
