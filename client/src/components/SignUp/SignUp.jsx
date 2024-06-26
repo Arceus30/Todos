@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "./SignUp.css";
 import axios from "axios";
@@ -10,14 +10,15 @@ import { toast } from "react-toastify";
 const SignUp = () => {
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
     const user = useSelector((state) => state.user.user);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
     useEffect(() => {
         if (isLoggedIn || user) {
             navigate(import.meta.env.VTIE_TODO);
         }
     }, [isLoggedIn, user, navigate]);
 
-    const dispatch = useDispatch();
     const form = useForm({
         defaultValues: {
             user: {
