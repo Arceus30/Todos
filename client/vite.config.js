@@ -6,10 +6,15 @@ export default defineConfig({
     plugins: [react()],
     server: {
         proxy: {
-            "/api": {
+            "/api/v1": {
                 target: "http://localhost:3000/",
                 changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/api/, ""),
+                rewrite: (path) => path.replace(/^\/api\/v1/, ""),
+            },
+            "/api/v2": {
+                target: "https://todos-76tg.onrender.com/",
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api\/v2/, ""),
             },
         },
     },

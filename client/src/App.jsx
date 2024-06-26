@@ -5,7 +5,11 @@ const App = () => {
     const [count, setCount] = useState(0);
     const handleClick = async () => {
         try {
-            const resp = await axios.get(import.meta.env.VITE_COUNT);
+            const COUNT_API =
+                import.meta.env.VITE_ENV === "production"
+                    ? import.meta.env.VITE_PROD_COUNT
+                    : import.meta.env.VITE_DEV_COUNT;
+            const resp = await axios.get(COUNT_API);
             setCount(resp.data.count);
         } catch (e) {
             setCount(1);
