@@ -84,7 +84,7 @@ app.get(process.env.UNIQUE_URL, async (req, res, next) => {
                     .json({ message: "Please enter a unique username" });
             }
         } else {
-            if (!user) {
+            if (user === null) {
                 return res.status(404).json({ message: "User not found" });
             }
         }
@@ -109,6 +109,39 @@ app.post(process.env.REGISTER, async (req, res, next) => {
         next(e);
     }
 });
+// Login user
+app.post(
+    process.env.LOGIN,
+    (req, res, next) => {
+        if (req.body && req.body.user) {
+            const { username, password } = req.body.user;
+            req.body = { username, password };
+        }
+        next();
+    },
+    (req, res, next) => {
+        passport.authenticate("local", (err, user, info) => {
+            if (err) {
+                return next(err);
+            }
+            if (!user) {
+                const err = { message: "Incorrect Username or password" };
+                return res.status(401).json({ err });
+            }
+            req.logIn(user, async (err) => {
+                if (err) {
+                    return next(err);
+                }
+                const { username } = user;
+                const loggedInUser = await User.find({ username });
+                return res.status(200).json({
+                    message: "User Login Successfully",
+                    loggedInUser,
+                });
+            });
+        })(req, res, next);
+    }
+);
 
 // undefined page error handling
 app.all("*", (req, res, next) => {

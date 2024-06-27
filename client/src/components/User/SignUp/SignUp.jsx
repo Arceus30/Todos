@@ -4,7 +4,7 @@ import "./SignUp.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../store/userSlice";
+import { login } from "../../../store/userSlice";
 import { toast } from "react-toastify";
 
 const SignUp = () => {
