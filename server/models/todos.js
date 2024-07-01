@@ -18,6 +18,10 @@ const todoSchema = new Schema({
         type: Date,
         default: Date.now(),
     },
+    dateCompleted: {
+        type: Date,
+        default: null,
+    },
 });
 
 module.exports = model("Todo", todoSchema);

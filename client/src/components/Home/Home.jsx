@@ -2,6 +2,7 @@ import React from "react";
 import "./Home.css";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Home = () => {
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -10,12 +11,16 @@ const Home = () => {
         if (isLoggedIn) {
             navigate(import.meta.env.VITE_TODO);
         }
+        toast.error("You need to login first", {
+            autoClose: 2000,
+            pauseOnHover: false,
+        });
         navigate(import.meta.env.VITE_SIGNIN);
     };
     return (
         <div className="d-flex my-auto justify-content-center align-items-center mb-3">
             <div className="w-75 d-flex justify-content-center align-items-center flex-column mx-0">
-                <h1 className="text-center customHead">
+                <h1 className="text-center customHead1">
                     Organize your <br />
                     work and life, finally.
                 </h1>

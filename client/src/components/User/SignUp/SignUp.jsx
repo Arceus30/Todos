@@ -15,9 +15,13 @@ const SignUp = () => {
 
     useEffect(() => {
         if (isLoggedIn || user) {
+            toast.info("You are already logged in", {
+                autoClose: 2000,
+                pauseOnHover: false,
+            });
             navigate(import.meta.env.VTIE_TODO);
         }
-    }, [isLoggedIn, user, navigate]);
+    }, []);
 
     const form = useForm({
         defaultValues: {
@@ -59,7 +63,10 @@ const SignUp = () => {
                 { params }
             );
         } catch (error) {
-            toast.error(error.response.data.message);
+            toast.error(error.response.data.message, {
+                autoClose: 2000,
+                pauseOnHover: false,
+            });
         }
     };
     const handleReset = (e) => {
@@ -75,10 +82,15 @@ const SignUp = () => {
             );
             dispatch(login(resp.data.registeredUser));
             navigate(import.meta.env.VITE_TODO);
-            toast.success("User account created");
+            toast.success("User account created", {
+                autoClose: 2000,
+                pauseOnHover: false,
+            });
         } catch (e) {
-            console.log("ERROR: ", e);
-            toast.error(e.response.data.err.message);
+            toast.error(e.response.data.err.message, {
+                autoClose: 2000,
+                pauseOnHover: false,
+            });
             reset();
         }
     };
@@ -86,10 +98,16 @@ const SignUp = () => {
         try {
             const error = errors.user;
             for (let e in error) {
-                toast.error(error[e].message);
+                toast.error(error[e].message, {
+                    autoClose: 2000,
+                    pauseOnHover: false,
+                });
             }
         } catch (e) {
-            toast.error(e.message);
+            toast.error(e.message, {
+                autoClose: 2000,
+                pauseOnHover: false,
+            });
         }
     };
     return (
@@ -166,7 +184,7 @@ const SignUp = () => {
                                     value: true,
                                     message: "Password is required",
                                 },
-                                validate: { customPasswordValidation },
+                                validate: customPasswordValidation,
                             })}
                         />
                         {!isSubmitted && errors.user?.password && (
@@ -192,7 +210,7 @@ const SignUp = () => {
                     </div>
                 </form>
             </div>
-            <div className="col-0 col-lg-5 h-100 d-flex justify-content-center align-items-center">
+            <div className="col-lg-5 h-100 d-none d-lg-flex justify-content-center align-items-center">
                 <h1 className="text-danger fw-bolder head px-2">Sign Up</h1>
             </div>
         </div>

@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const app = express();
-const { User } = require("./models");
+const { User, Todo } = require("./models");
 const session = require("express-session");
 const mongoSanitize = require("express-mongo-sanitize");
 const passport = require("passport");
@@ -142,6 +142,64 @@ app.post(
         })(req, res, next);
     }
 );
+
+// fetch user-todos data
+app.get(process.env.ALL_TODOS, async (req, res, next) => {
+    try {
+        const { id } = req.query;
+        const user = await User.findById(id).populate("todos");
+        if (user === null) {
+            return res.status(404).json("User not found");
+        }
+        const todos = user.todos;
+        res.status(200).json({ todos: todos });
+    } catch (e) {
+        next(e);
+    }
+});
+
+//todo completed
+app.get(process.env.TODO_COMPLETED, async (req, res, next) => {
+    try {
+        const { id } = req.query;
+        const todo = await Todo.findById(id);
+        if (todo === null) {
+            return res.status(404).json("User not found");
+        }
+        todo.isCompleted = true;
+        todo.dateCompleted = Date.now();
+        await todo.save();
+        res.status(200).json({
+            message: "todo completed",
+            completedTodo: todo,
+        });
+    } catch (e) {
+        next(e);
+    }
+});
+
+//todo deleted
+app.delete(process.env.TODO, async (req, res, next) => {
+    try {
+        const { todo, userId } = req.query;
+        const user = await User.findById(userId);
+        if (user === null) {
+            return res.status(404).json("User not found");
+        }
+        const deletedTodo = await Todo.findByIdAndDelete(todo._id);
+        if (!deletedTodo) {
+            return res.status(404).json("Todo not found");
+        }
+        user.todos = user.todos.filter((todoId) => !todoId.equals(todo._id));
+        await user.save();
+        res.status(200).json({
+            message: "todo deleted",
+            deletedTodo,
+        });
+    } catch (e) {
+        next(e);
+    }
+});
 
 // undefined page error handling
 app.all("*", (req, res, next) => {

@@ -1,4 +1,4 @@
-.customBtn1 {
+.customBtn2 {
     width: 40%;
 }
 
@@ -14,7 +14,7 @@
     .btnContainer {
         width: 80% !important;
     }
-    .customBtn1 {
+    .customBtn2 {
         width: 35%;
     }
 }

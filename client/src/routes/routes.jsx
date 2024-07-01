@@ -5,6 +5,7 @@ import Home from "../components/Home/Home";
 import SignUp from "../components/User/SignUp/SignUp";
 import SignIn from "../components/User/SignIn/SignIn";
 import About from "../components/About/About";
+import ShowTodos from "../components/Todos/ShowTodos";
 
 const routes = createBrowserRouter([
     {
@@ -28,10 +29,10 @@ const routes = createBrowserRouter([
                 path: import.meta.env.VITE_SIGNIN,
                 element: <SignIn />,
             },
-            // {
-            //     path: import.meta.env.VITE_ABOUT,
-            //     element: <About />,
-            // },
+            {
+                path: import.meta.env.VITE_TODO,
+                element: <ShowTodos />,
+            },
             // {
             //     path: import.meta.env.VITE_ABOUT,
             //     element: <About />,

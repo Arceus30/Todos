@@ -12,12 +12,15 @@ const SignIn = () => {
     const user = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
     useEffect(() => {
         if (isLoggedIn || user) {
+            toast.info("You are already logged in", {
+                autoClose: 2000,
+                pauseOnHover: false,
+            });
             navigate(import.meta.env.VTIE_TODO);
         }
-    }, [isLoggedIn, user, navigate]);
+    }, []);
 
     const form = useForm({
         defaultValues: {
@@ -26,7 +29,7 @@ const SignIn = () => {
                 password: "",
             },
         },
-        mode: "onSubmit",
+        mode: "onBlur",
     });
     const { register, handleSubmit, reset, formState } = form;
     const { errors, isSubmitted, isDirty, isValid, isSubmitting } = formState;
@@ -62,10 +65,16 @@ const SignIn = () => {
                 data
             );
             dispatch(login(resp.data.loggedInUser));
+            toast.success("User login successfully", {
+                autoClose: 2000,
+                pauseOnHover: false,
+            });
             navigate(import.meta.env.VITE_TODO);
-            toast.success("User login successfully");
         } catch (e) {
-            toast.error(e.response.data.err.message);
+            toast.error(e.response.data.err.message, {
+                autoClose: 2000,
+                pauseOnHover: false,
+            });
             reset();
         }
     };
@@ -74,16 +83,22 @@ const SignIn = () => {
         try {
             const error = errors.user;
             for (let e in error) {
-                toast.error(error[e].message);
+                toast.error(error[e].message, {
+                    autoClose: 2000,
+                    pauseOnHover: false,
+                });
             }
         } catch (e) {
-            toast.error(e.message);
+            toast.error(e.message, {
+                autoClose: 2000,
+                pauseOnHover: false,
+            });
         }
     };
 
     return (
         <div className="row g-0 h-100">
-            <div className="col-0 col-lg-5 h-100 d-flex justify-content-center align-items-center">
+            <div className="d-none col-lg-5 h-100 d-lg-flex justify-content-center align-items-center">
                 <h1 className="text-danger fw-bolder head px-2">Sign In</h1>
             </div>
             <div className="col-12 col-lg-7 h-100 d-flex justify-content-center align-items-center flex-column">
@@ -141,13 +156,13 @@ const SignIn = () => {
                     <div className="mt-3 d-flex justify-content-around justify-content-md-between mx-5 btnContainer">
                         <button
                             type="submit"
-                            className="btn btn-success fs-4 customBtn1 ms-3"
+                            className="btn btn-success fs-4 customBtn2 ms-3"
                             disabled={!isDirty || !isValid || isSubmitting}
                         >
                             Sign In
                         </button>
                         <button
-                            className="btn btn-warning fs-4 customBtn1 me-3"
+                            className="btn btn-warning fs-4 customBtn2 me-3"
                             onClick={handleReset}
                         >
                             Reset

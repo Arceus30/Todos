@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Navbar.css";
 import { useSelector, useDispatch } from "react-redux";
 import { SiTodoist } from "react-icons/si";
@@ -17,9 +17,16 @@ const Navbar = () => {
         if (isLoggedIn) {
             dispatch(logout());
             navigate(import.meta.env.VITE_HOME);
-            return toast.success("logout successfully");
+            toast.success("logout successfully", {
+                autoClose: 2000,
+                pauseOnHover: false,
+            });
+        } else {
+            toast.error("logout failed", {
+                autoClose: 2000,
+                pauseOnHover: false,
+            });
         }
-        toast.error("logout failed");
     };
     return (
         <nav className="navbar navbar-expand-lg m-0 px-0 px-lg-5 py-0">

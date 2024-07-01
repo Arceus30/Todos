@@ -1,11 +1,11 @@
-.customHead {
+.customHead1 {
     font-size: 1.8rem !important;
 }
 .customText {
     font-size: 1rem;
 }
 @media (min-width: 576px) {
-    .customHead {
+    .customHead1 {
         font-size: 3rem !important;
     }
     .customText {
@@ -13,7 +13,7 @@
     }
 }
 @media (min-width: 576px) {
-    .customHead {
+    .customHead1 {
         font-size: 3.75rem !important;
     }
 }
