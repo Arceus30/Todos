@@ -11,11 +11,11 @@ import { logout } from "../../store/userSlice";
 const Navbar = () => {
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
     const userId = useSelector((state) => state.user.userId);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleSignOut = () => {
-        dispatch(logout());
+        // dispatch(logout());
         toast.success("logout successfully");
         navigate(import.meta.env.VITE_HOME);
     };
