@@ -40,7 +40,6 @@ app.all("*", (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-    console.error(err);
     err.message = err.message || "Internal Server Error";
     err.status = err.status || 500;
     return res.status(err.status).json(err);

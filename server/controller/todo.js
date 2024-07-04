@@ -1,9 +1,9 @@
-const index = () => {};
-const createTodo = () => {};
-const showTodo = () => {};
-const todoCompleted = () => {};
-const editTodo = () => {};
-const deleteTodo = () => {};
+const index = (req, res, next) => {};
+const createTodo = (req, res, next) => {};
+const showTodo = (req, res, next) => {};
+const todoCompleted = (req, res, next) => {};
+const editTodo = (req, res, next) => {};
+const deleteTodo = (req, res, next) => {};
 
 module.exports = {
     index,
