@@ -1,8 +1,8 @@
-.customHead2 {
+.customhead4 {
     font-size: 25px;
 }
 
-.customBtn2 {
+.customBtn4 {
     font-size: 20px !important;
 }
 
@@ -11,21 +11,21 @@
 }
 
 @media (min-width: 400px) {
-    .customHead2 {
+    .customhead4 {
         font-size: 35px;
     }
 
-    .customBtn2 {
+    .customBtn4 {
         font-size: 25px !important;
     }
 }
 
 @media (min-width: 768px) {
-    .customHead2 {
+    .customhead4 {
         font-size: 50px;
     }
 
-    .customBtn2 {
+    .customBtn4 {
         font-size: 32px !important;
     }
 }

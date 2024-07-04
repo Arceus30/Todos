@@ -1,0 +1,27 @@
+.customCard1 {
+    width: 100%;
+    margin: 15px 0;
+}
+
+.customBtn3 {
+    width: 46%;
+    margin: 5px 0px;
+    font-size: 18px !important;
+}
+
+@media (min-width: 768px) {
+    .customCard1 {
+        width: 45%;
+    }
+}
+
+@media (min-width: 992px) {
+    .customCard1 {
+        width: 30%;
+    }
+}
+@media (min-width: 1400px) {
+    .customCard1 {
+        width: 22.8%;
+    }
+}

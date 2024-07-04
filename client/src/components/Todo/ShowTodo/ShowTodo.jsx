@@ -1,16 +1,16 @@
 // import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa6";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-// import { toast } from "react-toastify";
-// import TodoCard from "./TodoCard";
+import { toast } from "react-toastify";
+import TodoCard from "./TodoCard";
 import "./ShowTodo.css";
 
 const ShowTodo = () => {
-    //     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-    //     const userId = useSelector((state) => state.user.userId);
-    //     const navigate = useNavigate();
+    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+    const userId = useSelector((state) => state.user.userId);
+    const navigate = useNavigate();
     const [todos, setTodos] = useState(null);
 
     //     useEffect(() => {
@@ -43,9 +43,9 @@ const ShowTodo = () => {
     return (
         <div className="d-flex flex-column align-items-center mt-3">
             <div className="d-flex justify-content-around align-items-center w-100 my-1">
-                <h1 className="customHead2">All Todos</h1>
+                <h1 className="customhead4">All Todos</h1>
                 <Link
-                    className="btn btn-danger customBtn2 pt-1"
+                    className="btn btn-danger customBtn4 pt-1"
                     to={import.meta.env.VITE_CREATE_TODO}
                 >
                     <FaPlus className="plusIcon1 me-1" />
