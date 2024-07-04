@@ -28,22 +28,22 @@ const app = express();
 // app.use(express.urlencoded({ extended: true }));
 // app.use(express.json());
 
-// app.get("/", (req, res, next) => {
-//     res.status(200).json({ message: "GOOD" });
-// });
+app.get("/", (req, res, next) => {
+    res.status(200).json({ message: "GOOD" });
+});
 
 // app.use(process.env.USER, userRoutes);
 // app.use(process.env.TODOS, todoRoutes);
 
-// app.all("*", (req, res, next) => {
-//     return next(new ExpressError(404, "NOT FOUND"));
-// });
+app.all("*", (req, res, next) => {
+    return next(new ExpressError(404, "NOT FOUND"));
+});
 
-// app.use((err, req, res, next) => {
-//     err.message = err.message || "Internal Server Error";
-//     err.status = err.status || 500;
-//     return res.status(err.status).json(err);
-// });
+app.use((err, req, res, next) => {
+    err.message = err.message || "Internal Server Error";
+    err.status = err.status || 500;
+    return res.status(err.status).json(err);
+});
 
 const port = process.env.PORT;
 app.listen(port, () => {
