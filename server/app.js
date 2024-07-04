@@ -32,8 +32,8 @@ app.get("/", (req, res, next) => {
     res.status(200).json({ message: "GOOD" });
 });
 
-// app.use(process.env.USER, userRoutes);
-// app.use(process.env.TODOS, todoRoutes);
+app.use(process.env.USER, userRoutes);
+app.use(process.env.TODOS, todoRoutes);
 
 app.all("*", (req, res, next) => {
     return next(new ExpressError(404, "NOT FOUND"));
