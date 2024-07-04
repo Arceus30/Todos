@@ -1,27 +1,23 @@
 import React from "react";
 import "./Navbar.css";
-// import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { SiTodoist } from "react-icons/si";
 import { FiUserPlus } from "react-icons/fi";
 import { PiSignInBold, PiSignOutBold } from "react-icons/pi";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
-// import { logout } from "../../store/userSlice";
+import { logout } from "../../store/userSlice";
 
 const Navbar = () => {
-    //     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-    //     const userId = useSelector((state) => state.user.userId);
-    //     const dispatch = useDispatch();
-    // const navigate = useNavigate();
+    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+    const userId = useSelector((state) => state.user.userId);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSignOut = () => {
-        //         if (isLoggedIn && userId) {
-        //             dispatch(logout());
-        //             toast.success("logout successfully");
-        //             navigate(import.meta.env.VITE_HOME);
-        //         } else {
-        //             toast.error("logout failed!");
-        //         }
+        dispatch(logout());
+        toast.success("logout successfully");
+        navigate(import.meta.env.VITE_HOME);
     };
 
     return (
@@ -68,40 +64,44 @@ const Navbar = () => {
                                 About
                             </Link>
                         </li>
-                        <li className="nav-item mx-lg-3 mb-1 mb-lg-0">
-                            <Link
-                                className="btn btn-danger py-1 px-2 px-lg-3 d-flex"
-                                to={import.meta.env.VITE_SIGNUP}
-                            >
-                                <div className="mb-1 me-2">
-                                    <FiUserPlus />
-                                </div>
-                                Sign Up
-                            </Link>
-                        </li>
-                        <li className="nav-item mb-1 mb-lg-0">
-                            <Link
-                                className="btn btn-danger py-1 px-2 px-lg-3 d-flex"
-                                to={import.meta.env.VITE_SIGNIN}
-                            >
-                                <div className="mb-1 me-1">
-                                    <PiSignInBold />
-                                </div>
-                                Sign In
-                            </Link>
-                        </li>
-
-                        <li className="nav-item mx-lg-3 mb-1 mb-lg-0">
-                            <Link
-                                className="btn btn-danger py-1 px-2 px-lg-3 d-flex"
-                                onClick={handleSignOut}
-                            >
-                                <div className="mb-1 me-1">
-                                    <PiSignOutBold />
-                                </div>
-                                Sign Out
-                            </Link>
-                        </li>
+                        {!isLoggedIn || !user ? (
+                            <>
+                                <li className="nav-item mx-lg-3 mb-1 mb-lg-0">
+                                    <Link
+                                        className="btn btn-danger py-1 px-2 px-lg-3 d-flex"
+                                        to={import.meta.env.VITE_SIGNUP}
+                                    >
+                                        <div className="mb-1 me-2">
+                                            <FiUserPlus />
+                                        </div>
+                                        Sign Up
+                                    </Link>
+                                </li>
+                                <li className="nav-item mb-1 mb-lg-0">
+                                    <Link
+                                        className="btn btn-danger py-1 px-2 px-lg-3 d-flex"
+                                        to={import.meta.env.VITE_SIGNIN}
+                                    >
+                                        <div className="mb-1 me-1">
+                                            <PiSignInBold />
+                                        </div>
+                                        Sign In
+                                    </Link>
+                                </li>
+                            </>
+                        ) : (
+                            <li className="nav-item mx-lg-3 mb-1 mb-lg-0">
+                                <Link
+                                    className="btn btn-danger py-1 px-2 px-lg-3 d-flex"
+                                    onClick={handleSignOut}
+                                >
+                                    <div className="mb-1 me-1">
+                                        <PiSignOutBold />
+                                    </div>
+                                    Sign Out
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>

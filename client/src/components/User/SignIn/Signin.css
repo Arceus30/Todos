@@ -1,0 +1,26 @@
+.customBtn2 {
+    width: 40%;
+}
+
+.customContainer2,
+.customInput2 {
+    width: 100%;
+}
+.customhead3 {
+    font-size: 110px;
+}
+@media (min-width: 576px) {
+    .customInput2,
+    .customContainer2 {
+        width: 80% !important;
+    }
+    .customBtn2 {
+        width: 35%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .customhead3 {
+        font-size: 150px;
+    }
+}

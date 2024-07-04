@@ -1,19 +1,19 @@
 import React from "react";
 import "./Home.css";
-// import { useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
-// import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Home = () => {
-    //     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-    //     const userId = useSelector((state) => state.user.userId);
-    //     const navigate = useNavigate();
+    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+    const userId = useSelector((state) => state.user.userId);
+    const navigate = useNavigate();
     const handleClick = () => {
-        //         if (isLoggedIn || userId) {
-        //             navigate(import.meta.env.VITE_TODO);
-        //         }
-        //         toast.error("You need to login first");
-        //         navigate(import.meta.env.VITE_SIGNIN);
+        if (isLoggedIn || userId) {
+            navigate(import.meta.env.VITE_TODO);
+        }
+        toast.error("You need to login first");
+        navigate(import.meta.env.VITE_SIGNIN);
     };
     return (
         <div className="d-flex my-auto justify-content-center align-items-center mb-3">
