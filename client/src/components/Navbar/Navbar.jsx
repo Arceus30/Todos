@@ -1,5 +1,5 @@
 import React from "react";
-// import "./Navbar.css";
+import "./Navbar.css";
 // import { useSelector, useDispatch } from "react-redux";
 import { SiTodoist } from "react-icons/si";
 import { FiUserPlus } from "react-icons/fi";
@@ -62,7 +62,7 @@ const Navbar = () => {
                         </li>
                         <li className="nav-item mb-1 mb-lg-0">
                             <Link
-                                className="nav-link py-0 fs-5 about"
+                                className="nav-link py-0 fs-5 aboutNav"
                                 to={import.meta.env.VITE_ABOUT}
                             >
                                 About
