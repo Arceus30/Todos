@@ -1,0 +1,31 @@
+.customHead2 {
+    font-size: 25px;
+}
+
+.customBtn2 {
+    font-size: 20px !important;
+}
+
+.plusIcon1 {
+    margin-bottom: 4px;
+}
+
+@media (min-width: 400px) {
+    .customHead2 {
+        font-size: 35px;
+    }
+
+    .customBtn2 {
+        font-size: 25px !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .customHead2 {
+        font-size: 50px;
+    }
+
+    .customBtn2 {
+        font-size: 32px !important;
+    }
+}
