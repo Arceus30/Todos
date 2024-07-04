@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import ErrorElement from "./ErrorElement.jsx";
-import Home from "./components/Home/Home.jsx";
-import About from "./components/About/About.jsx";
-import Signup from "./components/User/SignUp/Signup.jsx";
-import Signin from "./components/User/SignIn/Signin.jsx";
-import ShowTodo from "./components/Todo/ShowTodo/ShowTodo.jsx";
-import CreateTodo from "./components/Todo/CreateTodo/CreateTodo.jsx";
-import EditTodo from "./components/Todo/EditTodo/EditTodo.jsx";
+import ErrorElement from "./ErrorElement";
+import Home from "./components/Home/Home";
+import About from "./components/About/About";
+import Signup from "./components/User/SignUp/Signup";
+import Signin from "./components/User/SignIn/Signin";
+import ShowTodo from "./components/Todo/ShowTodo/ShowTodo";
+import CreateTodo from "./components/Todo/CreateTodo/CreateTodo";
+import EditTodo from "./components/Todo/EditTodo/EditTodo";
 
 const routes = createBrowserRouter([
     {
