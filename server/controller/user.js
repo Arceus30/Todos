@@ -1,10 +1,11 @@
 const { User } = require("../models");
 const ExpressError = require("../ExpressError");
 
-const Signup = (req, res, next) => {
+const Signup = async (req, res, next) => {
     try {
         const { user } = req.body;
         const registeredUser = new User(user);
+        await registeredUser.save();
         return res.status(200).json({
             registeredUserId: registeredUser._id,
             message: "User Signup successfully",
