@@ -7,13 +7,14 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import "./TodoCard.css";
 
-const TodoCard = ({ todo, setTodos }) => {
+const TodoCard = ({ todo, userId, setTodos }) => {
     const handleComplete = async () => {
         try {
             const res = await axios.post(
                 `${import.meta.env.VITE_API_URL}${
                     import.meta.env.VITE_API_TODOS
-                }${import.meta.env.VITE_API_TODO.replace(":todoId", todo._id)}`
+                }${import.meta.env.VITE_API_TODO.replace(":todoId", todo._id)}`,
+                { userId }
             );
             const { completedTodo, message } = res.data;
             setTodos((prevTodos) => {
@@ -38,7 +39,8 @@ const TodoCard = ({ todo, setTodos }) => {
             const res = await axios.delete(
                 `${import.meta.env.VITE_API_URL}${
                     import.meta.env.VITE_API_TODOS
-                }${import.meta.env.VITE_API_TODO.replace(":todoId", todo._id)}`
+                }${import.meta.env.VITE_API_TODO.replace(":todoId", todo._id)}`,
+                { userId }
             );
             const { deletedTodoId, message } = res.data;
             setTodos((prevTodos) => {

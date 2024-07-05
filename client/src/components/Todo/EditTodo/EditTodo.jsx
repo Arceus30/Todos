@@ -24,7 +24,11 @@ const EditTodo = () => {
                 const res = await axios.get(
                     import.meta.env.VITE_API_URL +
                         import.meta.env.VITE_API_TODOS +
-                        import.meta.env.VITE_API_TODO.replace(":todoId", todoId)
+                        import.meta.env.VITE_API_TODO.replace(
+                            ":todoId",
+                            todoId
+                        ),
+                    { params: { userId } }
                 );
                 return res.data;
             } catch (e) {
@@ -42,6 +46,7 @@ const EditTodo = () => {
     };
     const onSubmit = async (data) => {
         try {
+            data.userId = userId;
             const res = await axios.put(
                 import.meta.env.VITE_API_URL +
                     import.meta.env.VITE_API_TODOS +

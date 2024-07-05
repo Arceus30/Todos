@@ -36,9 +36,13 @@ const createTodo = async (req, res, next) => {
 const showTodo = async (req, res, next) => {
     try {
         const { todoId } = req.params;
+        const { userId } = req.query;
         const todo = await Todo.findById(todoId);
         if (!todo) {
             return next(new ExpressError(404, "Todo not found"));
+        }
+        if (todo.createdBy !== userId) {
+            return next(new ExpressError(404, "You are not authorized"));
         }
         return res.status(200).json({ todo: todo });
     } catch (e) {
@@ -48,9 +52,13 @@ const showTodo = async (req, res, next) => {
 const todoCompleted = async (req, res, next) => {
     try {
         const { todoId } = req.params;
+        const { userId } = req.body;
         const todo = await Todo.findById(todoId);
         if (!todo) {
             return next(new ExpressError(404, "Todo not found"));
+        }
+        if (todo.createdBy !== userId) {
+            return next(new ExpressError(404, "You are not authorized"));
         }
         todo.isCompleted = true;
         todo.dateCompleted = Date.now();
@@ -66,8 +74,12 @@ const todoCompleted = async (req, res, next) => {
 const editTodo = async (req, res, next) => {
     try {
         const { todoId } = req.params;
-        const { todo } = req.body;
-        const updatedTodo = await Todo.findByIdAndUpdate(todoId, todo, {
+        const { todo, userId } = req.body;
+        const todoFound = await Todo.findById(todoId);
+        if (todoFound.createdBy !== userId) {
+            return next(new ExpressError(404, "You are not authorized"));
+        }
+        const updatedTodo = await Todo.findById(todoId, todo, {
             new: true,
         });
         if (!updatedTodo) {
@@ -81,13 +93,18 @@ const editTodo = async (req, res, next) => {
 const deleteTodo = async (req, res, next) => {
     try {
         const { todoId } = req.params;
-        const todo = await Todo.findByIdAndDelete(todoId);
-        if (!todo) {
+        const { userId } = req.body;
+        const todo = await Todo.findById(todoId);
+        if (todoFound.createdBy !== userId) {
+            return next(new ExpressError(404, "You are not authorized"));
+        }
+        const deletedTodo = await Todo.findByIdAndDelete(todoId);
+        if (!deletedTodo) {
             return next(new ExpressError(404, "Todo not found"));
         }
         return res.status(200).json({
             message: "Todo deleted successfully",
-            deletedTodoId: todo._id,
+            deletedTodoId: deletedTodo._id,
         });
     } catch (e) {
         next(e);

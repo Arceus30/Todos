@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { User, Todo } = require("../models");
 const todoTitles = require("./TodoTitles");
 const todoBody = require("./TodoBody");
+const bcrypt = require("bcryptjs");
 
 mongoose
     .connect("mongodb://localhost:27017/Todos")
@@ -19,7 +20,9 @@ const seedDB = async () => {
     await Todo.deleteMany({});
     const username = "keshav";
     const email = "keshavkhandelwal30@gmail.com";
-    const password = "Keshav@123";
+    const salt = bcrypt.genSaltSync(10);
+    const password = bcrypt.hashSync("Keshav@123", salt);
+
     const user = new User({ email, username, password });
 
     for (let i = 0; i < 50; i++) {

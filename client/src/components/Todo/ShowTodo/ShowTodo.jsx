@@ -59,6 +59,7 @@ const ShowTodo = () => {
                             key={todo._id}
                             todo={todo}
                             setTodos={setTodos}
+                            userId={userId}
                         />
                     ))
                 ) : (
