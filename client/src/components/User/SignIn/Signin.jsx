@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "./Signin.css";
 import { customPasswordValidation } from "../../../helper/passwordValidation";
-import { onError } from "../../../helper/formError";
+import { userOnError } from "../../../helper/formError";
 import { setCredentials } from "../../../store/userSlice";
 
 const Signin = () => {
@@ -17,7 +17,7 @@ const Signin = () => {
     useEffect(() => {
         if (isLoggedIn || userId) {
             toast.info("You are already logged in");
-            navigate(import.meta.env.VTIE_TODO);
+            navigate(import.meta.env.VITE_TODO);
         }
     }, []);
 
@@ -51,7 +51,7 @@ const Signin = () => {
             toast.success(message);
             navigate(import.meta.env.VITE_TODO);
         } catch (e) {
-            toast.error(e.response.data.err.message);
+            toast.error(e.response.data.message);
             reset();
         }
     };
@@ -66,7 +66,7 @@ const Signin = () => {
             <div className="col-12 col-lg-7 h-100 d-flex justify-content-center align-items-center flex-column">
                 <form
                     className="w-100 d-flex flex-column justify-content-center align-items-center"
-                    onSubmit={handleSubmit(onSubmit, onError)}
+                    onSubmit={handleSubmit(onSubmit, userOnError)}
                 >
                     <div className="px-3 py-0 mb-0 customInput2">
                         <label htmlFor="username" className="form-label fs-4">

@@ -29,7 +29,7 @@ const TodoCard = ({ todo, setTodos }) => {
             });
             toast.success(message);
         } catch (e) {
-            toast.error(e.message);
+            toast.error(e.res.data.message);
         }
     };
 
@@ -48,7 +48,7 @@ const TodoCard = ({ todo, setTodos }) => {
             });
             toast.success(message);
         } catch (e) {
-            toast.error(e.message);
+            toast.error(e.res.data.message);
         }
     };
 

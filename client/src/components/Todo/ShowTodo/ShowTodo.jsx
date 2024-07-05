@@ -31,7 +31,7 @@ const ShowTodo = () => {
                 );
                 setTodos(res.data.todos);
             } catch (e) {
-                toast.error(e.response.data.err.message);
+                toast.error(e.response.data.message);
                 navigate(import.meta.env.VITE_HOME);
             }
         };

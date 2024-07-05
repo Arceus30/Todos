@@ -7,7 +7,7 @@ import { setCredentials } from "../../../store/userSlice";
 import { toast } from "react-toastify";
 import "./Signup.css";
 import { customPasswordValidation } from "../../../helper/passwordValidation";
-import { onError } from "../../../helper/formError";
+import { userOnError } from "../../../helper/formError";
 
 const Signup = () => {
     const user = useSelector((state) => state.user);
@@ -18,7 +18,7 @@ const Signup = () => {
     useEffect(() => {
         if (isLoggedIn || userId) {
             toast.info("You are already logged in");
-            navigate(import.meta.env.VTIE_TODO);
+            navigate(import.meta.env.VITE_TODO);
         }
     }, []);
 
@@ -63,7 +63,7 @@ const Signup = () => {
             <div className="col-12 col-lg-7 h-100 d-flex justify-content-center align-items-center">
                 <form
                     className="h-100 w-100 d-flex flex-column justify-content-center align-items-center"
-                    onSubmit={handleSubmit(onSubmit, onError)}
+                    onSubmit={handleSubmit(onSubmit, userOnError)}
                 >
                     <div className="px-3 py-0 mb-0 customInput1">
                         <label htmlFor="email" className="form-label fs-4">

@@ -4,6 +4,10 @@ const ExpressError = require("../ExpressError");
 const Signup = async (req, res, next) => {
     try {
         const { user } = req.body;
+        const userFound = await User.findOne({ username: user.username });
+        if (userFound) {
+            return next(new ExpressError(405, "Username already exists"));
+        }
         const registeredUser = new User(user);
         await registeredUser.save();
         return res.status(200).json({

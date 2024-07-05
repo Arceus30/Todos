@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./EditTodo.css";
+import { todoOnError } from "../../../helper/formError";
 
 const EditTodo = () => {
     const user = useSelector((state) => state.user);
@@ -27,7 +28,7 @@ const EditTodo = () => {
                 );
                 return res.data;
             } catch (e) {
-                toast.error(e.resp.data.err.message);
+                toast.error(e.resp.data.message);
                 navigate(import.meta.env.VITE_TODO);
             }
         },
@@ -50,18 +51,8 @@ const EditTodo = () => {
             toast.success(res.data.message);
             navigate(import.meta.env.VITE_TODO);
         } catch (e) {
-            toast.error(e.response.data.err.message);
+            toast.error(e.response.data.message);
             reset();
-        }
-    };
-    const onError = (errors) => {
-        try {
-            const error = errors.todo;
-            for (let e in error) {
-                toast.error(error[e].message);
-            }
-        } catch (e) {
-            toast.error(e.message);
         }
     };
     return (
@@ -75,7 +66,7 @@ const EditTodo = () => {
             <div className="col-12 col-lg-7 h-100 d-flex justify-content-center align-items-center">
                 <form
                     className="h-100 w-100 d-flex flex-column justify-content-center align-items-center"
-                    onSubmit={handleSubmit(onSubmit, onError)}
+                    onSubmit={handleSubmit(onSubmit, todoOnError)}
                 >
                     <div className="px-3 py-0 mb-0 customInput3">
                         <label htmlFor="title" className="form-label fs-4">
