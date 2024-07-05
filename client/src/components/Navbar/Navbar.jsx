@@ -9,13 +9,13 @@ import { useNavigate, Link } from "react-router-dom";
 import { logout } from "../../store/userSlice";
 
 const Navbar = () => {
-    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-    const userId = useSelector((state) => state.user.userId);
-    // const dispatch = useDispatch();
+    const user = useSelector((state) => state.user);
+    const { isLoggedIn, userId } = user;
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleSignOut = () => {
-        // dispatch(logout());
+        dispatch(logout());
         toast.success("logout successfully");
         navigate(import.meta.env.VITE_HOME);
     };
@@ -64,7 +64,7 @@ const Navbar = () => {
                                 About
                             </Link>
                         </li>
-                        {!isLoggedIn || !user ? (
+                        {!isLoggedIn || !userId ? (
                             <>
                                 <li className="nav-item mx-lg-3 mb-1 mb-lg-0">
                                     <Link

@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Home = () => {
-    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-    const userId = useSelector((state) => state.user.userId);
+    const user = useSelector((state) => state.user);
+    const { isLoggedIn, userId } = user;
     const navigate = useNavigate();
     const handleClick = () => {
         if (isLoggedIn || userId) {

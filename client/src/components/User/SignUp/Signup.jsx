@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-// import axios from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { login } from "../../../store/userSlice";
+import { setCredentials } from "../../../store/userSlice";
 import { toast } from "react-toastify";
 import "./Signup.css";
 import { customPasswordValidation } from "../../../helper/passwordValidation";
-import { onError, handleReset } from "../../../helper/resetAndError";
+import { onError } from "../../../helper/formError";
 
 const Signup = () => {
-    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-    const userId = useSelector((state) => state.user.userId);
-    // const dispatch = useDispatch();
+    const user = useSelector((state) => state.user);
+    const { isLoggedIn, userId } = user;
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,20 +35,27 @@ const Signup = () => {
     const { register, handleSubmit, reset, formState } = form;
     const { errors, isSubmitted, isDirty, isValid, isSubmitting } = formState;
 
+    const handleReset = (e) => {
+        e.preventDefault();
+        reset();
+    };
+
     const onSubmit = async (data) => {
-        //     try {
-        //         const resp = await axios.post(
-        //             import.meta.env.VITE_API_URL +
-        //                 import.meta.env.VITE_API_USER_REGISTER,
-        //             data
-        //         );
-        //         dispatch(login(resp.data.userId));
-        //             toast.success(resp.data.message);
-        //             navigate(import.meta.env.VITE_TODO);
-        //         } catch (e) {
-        //             toast.error(e.response.data.err.message);
-        //             reset();
-        //         }
+        try {
+            const res = await axios.post(
+                import.meta.env.VITE_API_URL +
+                    import.meta.env.VITE_API_USER +
+                    import.meta.env.VITE_SIGNUP,
+                data
+            );
+            const { registeredUserId, message } = res.data;
+            dispatch(setCredentials(registeredUserId));
+            toast.success(message);
+            navigate(import.meta.env.VITE_TODO);
+        } catch (e) {
+            toast.error(e.response.data.message);
+            reset();
+        }
     };
 
     return (

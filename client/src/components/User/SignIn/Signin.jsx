@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-// import axios from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { login } from "../../../store/userSlice";
 import { toast } from "react-toastify";
 import "./Signin.css";
 import { customPasswordValidation } from "../../../helper/passwordValidation";
-import { handleReset, onError } from "../../../helper/resetAndError";
+import { onError } from "../../../helper/formError";
+import { setCredentials } from "../../../store/userSlice";
 
 const Signin = () => {
-    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-    const userId = useSelector((state) => state.user.userId);
-    // const dispatch = useDispatch();
+    const user = useSelector((state) => state.user);
+    const { isLoggedIn, userId } = user;
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     useEffect(() => {
         if (isLoggedIn || userId) {
@@ -33,20 +33,27 @@ const Signin = () => {
     const { register, handleSubmit, reset, formState } = form;
     const { errors, isSubmitted, isDirty, isValid, isSubmitting } = formState;
 
+    const handleReset = (e) => {
+        e.preventDefault();
+        reset();
+    };
+
     const onSubmit = async (data) => {
-        //         try {
-        //             const resp = await axios.post(
-        //                 import.meta.env.VITE_API_URL +
-        //                     import.meta.env.VITE_API_USER_LOGIN,
-        //                 data
-        //             );
-        //             dispatch(login(resp.data.loggedInUserId));
-        //             toast.success(resp.data.message);
-        //             navigate(import.meta.env.VITE_TODO);
-        //         } catch (e) {
-        //             toast.error(e.response.data.err.message);
-        //             reset();
-        //         }
+        try {
+            const res = await axios.post(
+                import.meta.env.VITE_API_URL +
+                    import.meta.env.VITE_API_USER +
+                    import.meta.env.VITE_SIGNIN,
+                data
+            );
+            const { loggedInUserId, message } = res.data;
+            dispatch(setCredentials(loggedInUserId));
+            toast.success(message);
+            navigate(import.meta.env.VITE_TODO);
+        } catch (e) {
+            toast.error(e.response.data.err.message);
+            reset();
+        }
     };
 
     return (

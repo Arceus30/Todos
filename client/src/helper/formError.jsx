@@ -8,8 +8,3 @@ export const onError = async (errors) => {
         toast.error(e.message);
     }
 };
-
-export const handleReset = (e) => {
-    e.preventDefault();
-    reset();
-};

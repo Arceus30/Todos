@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 import React, { useState } from "react";
 import { TiTick } from "react-icons/ti";
 import { FaEdit } from "react-icons/fa";
@@ -7,53 +7,49 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import "./TodoCard.css";
 
-const TodoCard = () => {
+const TodoCard = ({ todo, setTodos }) => {
     const handleComplete = async () => {
-        //         try {
-        //             const resp = await axios.post(
-        //                 `${
-        //                     import.meta.env.VITE_API_URL
-        //                 }${import.meta.env.VITE_API_SPECIFIC_TODOS.replace(
-        //                     ":todoId",
-        //                     todo._id
-        //                 )}`
-        //             );
-        //             toast.success(resp.data.message);
-        //             const { completedTodo } = resp.data;
-        //             setTodos((prevTodos) => {
-        //                 return prevTodos.map((prevTodo) =>
-        //                     prevTodo._id === completedTodo._id
-        //                         ? {
-        //                               ...prevTodo,
-        //                               isCompleted: true,
-        //                               dateCompleted: completedTodo.dateCompleted,
-        //                           }
-        //                         : prevTodo
-        //                 );
-        //             });
-        //         } catch (e) {
-        //             toast.error(e.message);
-        //         }
+        try {
+            const res = await axios.post(
+                `${import.meta.env.VITE_API_URL}${
+                    import.meta.env.VITE_API_TODOS
+                }${import.meta.env.VITE_API_TODO.replace(":todoId", todo._id)}`
+            );
+            const { completedTodo, message } = res.data;
+            setTodos((prevTodos) => {
+                return prevTodos.map((prevTodo) =>
+                    prevTodo._id === completedTodo._id
+                        ? {
+                              ...prevTodo,
+                              isCompleted: true,
+                              dateCompleted: completedTodo.dateCompleted,
+                          }
+                        : prevTodo
+                );
+            });
+            toast.success(message);
+        } catch (e) {
+            toast.error(e.message);
+        }
     };
 
     const handleDelete = async () => {
-        //         try {
-        //             const resp = await axios.delete(
-        //                 `${import.meta.env.VITE_API_URL}${
-        //                     import.meta.env.VITE_API_TODO
-        //                 }?userId=${userId}`,
-        //                 { data: { todo } }
-        //             );
-        //             toast.success(resp.data.message);
-        //             const { deletedTodo } = resp.data;
-        //             setTodos((prevTodos) => {
-        //                 return prevTodos.filter(
-        //                     (prevTodo) => prevTodo._id !== deletedTodo._id
-        //                 );
-        //             });
-        //         } catch (e) {
-        //             toast.error(e.message);
-        //         }
+        try {
+            const res = await axios.delete(
+                `${import.meta.env.VITE_API_URL}${
+                    import.meta.env.VITE_API_TODOS
+                }${import.meta.env.VITE_API_TODO.replace(":todoId", todo._id)}`
+            );
+            const { deletedTodoId, message } = res.data;
+            setTodos((prevTodos) => {
+                return prevTodos.filter(
+                    (prevTodo) => prevTodo._id !== deletedTodoId
+                );
+            });
+            toast.success(message);
+        } catch (e) {
+            toast.error(e.message);
+        }
     };
 
     return (
