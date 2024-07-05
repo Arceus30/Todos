@@ -6,11 +6,11 @@ const Signup = async (req, res, next) => {
         const { user } = req.body;
         const userFound = await User.findOne({ username: user.username });
         if (userFound) {
-            return next(new ExpressError(405, "Username already exists"));
+            return next(new ExpressError(409, "Username already exists"));
         }
         const registeredUser = new User(user);
         await registeredUser.save();
-        return res.status(200).json({
+        return res.status(201).json({
             registeredUserId: registeredUser._id,
             message: "User Signup successfully",
         });
@@ -24,12 +24,12 @@ const Signin = async (req, res, next) => {
         const loggedInUser = await User.findOne(user);
         if (!loggedInUser) {
             return next(
-                new ExpressError(404, "Incorrect username or password")
+                new ExpressError(401, "Incorrect username or password")
             );
         }
         return res.status(200).json({
             loggedInUserId: loggedInUser._id,
-            message: "User Signup successfully",
+            message: "User Logged in successfully",
         });
     } catch (e) {
         next(e);

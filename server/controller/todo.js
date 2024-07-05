@@ -28,7 +28,7 @@ const createTodo = async (req, res, next) => {
         createdTodo.createdBy = user;
         user.todos.push(createdTodo);
         await Promise.all([createdTodo.save(), user.save()]);
-        return res.status(200).json({ message: "Todo Created Successfully" });
+        return res.status(201).json({ message: "Todo Created Successfully" });
     } catch (e) {
         next(e);
     }
