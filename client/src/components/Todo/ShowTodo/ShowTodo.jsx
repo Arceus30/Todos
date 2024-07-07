@@ -15,7 +15,7 @@ const ShowTodo = () => {
 
     useEffect(() => {
         if (!isLoggedIn || !userId) {
-            navigate(import.meta.env.VITE_SIGNIN);
+            return navigate(import.meta.env.VITE_SIGNIN);
             toast.error("You need to login first");
         }
     }, []);
@@ -32,7 +32,7 @@ const ShowTodo = () => {
                 setTodos(res.data.todos);
             } catch (e) {
                 toast.error(e.response.data.message);
-                navigate(import.meta.env.VITE_HOME);
+                return navigate(import.meta.env.VITE_HOME);
             }
         };
         if (isLoggedIn && userId) {

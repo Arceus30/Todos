@@ -17,7 +17,7 @@ const Navbar = () => {
     const handleSignOut = () => {
         dispatch(logout());
         toast.success("logout successfully");
-        navigate(import.meta.env.VITE_HOME);
+        return navigate(import.meta.env.VITE_HOME);
     };
 
     return (

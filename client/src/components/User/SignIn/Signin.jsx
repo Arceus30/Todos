@@ -17,7 +17,7 @@ const Signin = () => {
     useEffect(() => {
         if (isLoggedIn || userId) {
             toast.info("You are already logged in");
-            navigate(import.meta.env.VITE_TODO);
+            return navigate(import.meta.env.VITE_TODO);
         }
     }, []);
 
@@ -49,7 +49,7 @@ const Signin = () => {
             const { loggedInUserId, message } = res.data;
             dispatch(setCredentials(loggedInUserId));
             toast.success(message);
-            navigate(import.meta.env.VITE_TODO);
+            return navigate(import.meta.env.VITE_TODO);
         } catch (e) {
             toast.error(e.response.data.message);
             reset();

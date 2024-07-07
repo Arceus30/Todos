@@ -10,10 +10,10 @@ const Home = () => {
     const navigate = useNavigate();
     const handleClick = () => {
         if (isLoggedIn || userId) {
-            navigate(import.meta.env.VITE_TODO);
+            return navigate(import.meta.env.VITE_TODO);
         }
         toast.error("You need to login first");
-        navigate(import.meta.env.VITE_SIGNIN);
+        return navigate(import.meta.env.VITE_SIGNIN);
     };
     return (
         <div className="d-flex my-auto justify-content-center align-items-center mb-3">

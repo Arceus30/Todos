@@ -14,7 +14,7 @@ const CreateTodos = () => {
     useEffect(() => {
         if (!isLoggedIn || !userId) {
             toast.error("You need to login first");
-            navigate(import.meta.env.VITE_SIGNIN);
+            return navigate(import.meta.env.VITE_SIGNIN);
         }
     }, []);
     const form = useForm({
@@ -42,7 +42,7 @@ const CreateTodos = () => {
                 data
             );
             toast.success(res.data.message);
-            navigate(import.meta.env.VITE_TODO);
+            return navigate(import.meta.env.VITE_TODO);
         } catch (e) {
             toast.error(e.response.data.message);
             reset();
